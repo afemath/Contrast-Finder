@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
-                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
-    
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -14,5 +16,17 @@
             <value>.jsp</value>
         </property>
     </bean>
+
+
+    <!-- Documentation
+         http://docs.spring.io/spring/docs/4.3.7.RELEASE/spring-framework-reference/html/mvc.html#mvc-caching-static-resources
+         http://docs.spring.io/spring/docs/4.3.7.RELEASE/spring-framework-reference/html/mvc.html#mvc-config-static-resources
+    -->
+    <mvc:resources mapping="/Js/**"  location="/Js/" cache-period="31556926" />
+    <mvc:resources mapping="/Css/**" location="/Css/">
+        <mvc:cache-control max-age="3600" cache-public="true"/>
+    </mvc:resources>
+    <mvc:annotation-driven />
+
 
 </beans>
